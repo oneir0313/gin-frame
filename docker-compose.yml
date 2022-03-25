@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  api:
+    build:
+      args:
+        env: master
+      context: .
+      dockerfile: docker/api.Dockerfile
+    image: api:latest
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ADDRESS: ${MYSQL_ADDRESS}
+      REDIS_DATABASE: ${REDIS_DATABASE}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_ADDRESS: ${REDIS_ADDRESS}
+      CRONTAB_SETTING: ${CRONTAB_SETTING}
+      TZ: Asia/Taipei
+    restart: always
+    container_name: api
+    ports:
+      - 9220:9220
+networks:
+  default:
+    name: app_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.114.0.0/16

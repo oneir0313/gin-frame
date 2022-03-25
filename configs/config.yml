@@ -1,0 +1,15 @@
+env: dev
+api_groups:
+  http_bind: ":9220"
+  mysql:
+    address: "192.168.23.105:3306"
+    username: "root"
+    password: "123456"
+  redis:
+    address: "192.168.23.105:6379"
+    password: "123456"
+    database: 0
+trigger_groups:
+  crontab_setting: "*/1 1-22 * * *"
+  restart: true
+debug: true
