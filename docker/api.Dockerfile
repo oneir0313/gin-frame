@@ -6,7 +6,7 @@ COPY . .
 ENV GO111MODULE=on
 
 WORKDIR /api/cmd
-RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -mod=vendor -o api
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o api
 
 FROM alpine:latest
 RUN apk update && \
@@ -18,5 +18,6 @@ RUN apk update && \
 ARG env
 WORKDIR /api
 COPY --from=builder /api/cmd/api /api/
+COPY --from=builder /api/configs/config.yml /api/configs/config.yml
 
 CMD ./api
