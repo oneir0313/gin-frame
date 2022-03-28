@@ -49,8 +49,6 @@ type Configuration struct {
 
 	Api struct {
 		HTTPBind string `yaml:"http_bind"`
-		Username string `yaml:"username"`
-		Password string `yaml:"password"`
 		Mysql    Mysql  `yaml:"mysql"`
 		Redis    Redis  `yaml:"redis"`
 	} `yaml:"api_groups"`
@@ -100,6 +98,16 @@ func Reload() *Configuration {
 
 	if value, ok := os.LookupEnv("CRONTAB_SETTING"); ok {
 		tempPara.Job.CrontabSetting = value
+	}
+
+	
+	if value, ok := os.LookupEnv("DEBUG"); ok {
+		if value == "true"{
+			tempPara.Debug = true
+		}
+		if value == "false"{
+			tempPara.Debug = false
+		}
 	}
 
 	log.Info().Msgf("%v", tempPara)

@@ -2,6 +2,18 @@
 
 Architecture template with gin framework, cronjob
 
+## Environment Variables
+
+- Run directly
+
+    `configs/config.yml`
+- Run with docker-compose (Some values are replaced at `lib/config/config.go`)
+    
+    `.env` 
+
+
+</details>
+
 ## Running the project 
 
 - Make sure you have docker installed and redis/mysql is running. 
