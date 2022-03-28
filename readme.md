@@ -7,7 +7,7 @@ Architecture template with gin framework, cronjob
 - Make sure you have docker installed and redis/mysql is running. 
 - Configure `configs/config.yml` redis/mysql host
 - Run `docker-compose up -d` 
-- Go to `localhost:9220` to verify if the server works. 
+- Check `localhost:9220`. 
 
 ## Todos
 - [ ] Try Debug Port
