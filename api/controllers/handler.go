@@ -30,7 +30,7 @@ func NewHandler() Handler {
 	if configmanager.Global.Env == "release" {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	
+
 	engine.NoRoute(func(ctx *gin.Context) {
 		ctx.String(http.StatusNotFound, "this url is not found on this service")
 	})

@@ -10,9 +10,7 @@ type PublicController struct {
 }
 
 func NewPublicController() PublicController {
-	return PublicController{
-
-	}
+	return PublicController{}
 }
 
 func (r *PublicController) Health(ctx *gin.Context) {

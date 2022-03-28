@@ -44,15 +44,15 @@ type Redis struct {
 //Configuration 參數結構
 type Configuration struct {
 	//WSServer jiface.IServer
-	Env string `yaml:"env"`
-	Debug bool `yaml:"debug"`
+	Env   string `yaml:"env"`
+	Debug bool   `yaml:"debug"`
 
 	Api struct {
-		HTTPBind         string `yaml:"http_bind"`
-		Username         string `yaml:"username"`
-		Password         string `yaml:"password"`
-		Mysql            Mysql  `yaml:"mysql"`
-		Redis            Redis  `yaml:"redis"`
+		HTTPBind string `yaml:"http_bind"`
+		Username string `yaml:"username"`
+		Password string `yaml:"password"`
+		Mysql    Mysql  `yaml:"mysql"`
+		Redis    Redis  `yaml:"redis"`
 	} `yaml:"api_groups"`
 
 	Job struct {

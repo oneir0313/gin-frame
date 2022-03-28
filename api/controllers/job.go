@@ -12,7 +12,7 @@ import (
 )
 
 type JobController struct {
-	service    services.JobService
+	service services.JobService
 }
 
 func NewJobController(service services.JobService) JobController {
@@ -44,7 +44,7 @@ func (r *JobController) GetJobs(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, jobs)
 }
 
-func  (r *JobController) DeleteJob(ctx *gin.Context) {
+func (r *JobController) DeleteJob(ctx *gin.Context) {
 	paramID := ctx.Param("id")
 	id, err := strconv.Atoi(paramID)
 	if err != nil {

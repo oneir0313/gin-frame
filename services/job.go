@@ -12,7 +12,7 @@ import (
 )
 
 type JobService struct {
-	cron         *cron.Cron
+	cron *cron.Cron
 	jobs []jobEntry
 }
 
@@ -45,7 +45,7 @@ func (r *JobService) AddJob(job model.Job) (cron.EntryID, error) {
 
 	addJob := jobEntry{
 		EntryID: int(entryId),
-		Job: job,
+		Job:     job,
 	}
 
 	r.jobs = append(r.jobs, addJob)

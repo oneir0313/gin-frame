@@ -35,10 +35,10 @@ func initializeService() (*controllers.Handler, *sql.DB, *redis.Client, error) {
 
 	routes := routes.NewRoutes(publicRoutes, jobRoutes)
 	routes.Setup()
-	
+
 	middlewares := middlewares.NewCorsMiddleware(handler)
 	middlewares.Setup()
-	
+
 	mysqlDB := ConnectMysqlDB()
 	redisDB := ConnectRedisDB()
 
