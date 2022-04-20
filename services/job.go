@@ -23,7 +23,7 @@ type jobEntry struct {
 
 func NewJobService() JobService {
 	utc8, _ := time.LoadLocation("Asia/Taipei")
-	schedule := cron.New(cron.WithLocation(utc8))
+	schedule := cron.New(cron.WithLocation(utc8), cron.WithSeconds())
 	schedule.Start()
 
 	tmpJobManager := JobService{
@@ -36,7 +36,7 @@ func NewJobService() JobService {
 func (r *JobService) AddJob(job model.Job) (cron.EntryID, error) {
 
 	entryId, err := r.cron.AddFunc(job.Schedule, func() {
-		log.Info().Msgf("Job number is %s", job.Number)
+		log.Info().Msgf("Job number is %d", job.Number)
 	})
 
 	if err != nil {
