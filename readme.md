@@ -22,7 +22,6 @@ Architecture template with gin framework, cronjob
 - Check `localhost:9220`. 
 
 ## Todos
-- [ ] Try Debug Port
 - [ ] respository template examples
 - [ ] Swagger documentation examples
 - [ ] Unit testing examples.

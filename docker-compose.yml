@@ -4,19 +4,19 @@ services:
     build:
       context: .
       dockerfile: docker/api.Dockerfile
-    image: gin-frame:latest
     environment:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ADDRESS: ${MYSQL_ADDRESS}
-      REDIS_DATABASE: ${REDIS_DATABASE}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      REDIS_ADDRESS: ${REDIS_ADDRESS}
-      CRONTAB_SETTING: ${CRONTAB_SETTING}
+      # REDIS_DATABASE: ${REDIS_DATABASE}
+      # REDIS_PASSWORD: ${REDIS_PASSWORD}
+      # REDIS_ADDRESS: ${REDIS_ADDRESS}
+      # CRONTAB_SETTING: ${CRONTAB_SETTING}
       TZ: Asia/Taipei
     restart: always
     ports:
       - 9220:9220
+      - 5002:2345
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9220/health"]
       interval: 1m30s
