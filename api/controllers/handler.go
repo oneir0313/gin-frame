@@ -27,9 +27,7 @@ func NewHandler() Handler {
 
 	engine.Use(cors.New(corsConfig))
 
-	if configmanager.Global.Env == "release" {
-		gin.SetMode(gin.ReleaseMode)
-	}
+	gin.SetMode(configmanager.Global.Env)
 
 	engine.NoRoute(func(ctx *gin.Context) {
 		ctx.String(http.StatusNotFound, "this url is not found on this service")

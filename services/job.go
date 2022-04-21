@@ -36,7 +36,7 @@ func NewJobService() JobService {
 func (r *JobService) AddJob(job model.Job) (cron.EntryID, error) {
 
 	entryId, err := r.cron.AddFunc(job.Schedule, func() {
-		log.Info().Msgf("Job number is %d", job.Number)
+		log.Info().Msgf("%s", job.Message)
 	})
 
 	if err != nil {

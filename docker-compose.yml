@@ -16,7 +16,6 @@ services:
     restart: always
     ports:
       - 9220:9220
-      - 5002:2345
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9220/health"]
       interval: 1m30s

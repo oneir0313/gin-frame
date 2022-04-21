@@ -45,7 +45,6 @@ type Redis struct {
 type Configuration struct {
 	//WSServer jiface.IServer
 	Env   string `yaml:"env"`
-	Debug bool   `yaml:"debug"`
 
 	Api struct {
 		HTTPBind string `yaml:"http_bind"`
@@ -98,16 +97,6 @@ func Reload() *Configuration {
 
 	if value, ok := os.LookupEnv("CRONTAB_SETTING"); ok {
 		tempPara.Job.CrontabSetting = value
-	}
-
-	
-	if value, ok := os.LookupEnv("DEBUG"); ok {
-		if value == "true"{
-			tempPara.Debug = true
-		}
-		if value == "false"{
-			tempPara.Debug = false
-		}
 	}
 
 	log.Info().Msgf("%v", tempPara)

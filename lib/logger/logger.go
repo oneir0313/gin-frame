@@ -2,7 +2,6 @@ package logger
 
 import (
 	"fmt"
-	configmanager "gin-frame/lib/config"
 	"io"
 	"os"
 	"path"
@@ -10,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
@@ -55,7 +55,7 @@ func InitLogger() zerolog.Logger {
 
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
-	if configmanager.Global.Debug {
+	if gin.IsDebugging() {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)
 	}
 

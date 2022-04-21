@@ -1,4 +1,4 @@
-env: dev
+env: debug
 api_groups:
   http_bind: ":9220"
   mysql:
@@ -12,4 +12,3 @@ api_groups:
 trigger_groups:
   crontab_setting: "*/1 1-22 * * *"
   restart: true
-debug: true
