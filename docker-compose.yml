@@ -4,20 +4,34 @@ services:
     build:
       context: .
       dockerfile: docker/api.Dockerfile
-    image: gin-frame:latest
     environment:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ADDRESS: ${MYSQL_ADDRESS}
-      REDIS_DATABASE: ${REDIS_DATABASE}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      REDIS_ADDRESS: ${REDIS_ADDRESS}
-      CRONTAB_SETTING: ${CRONTAB_SETTING}
+      # REDIS_DATABASE: ${REDIS_DATABASE}
+      # REDIS_PASSWORD: ${REDIS_PASSWORD}
+      # REDIS_ADDRESS: ${REDIS_ADDRESS}
+      # CRONTAB_SETTING: ${CRONTAB_SETTING}
       TZ: Asia/Taipei
     restart: always
-    container_name: gin-frame
     ports:
       - 9220:9220
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9220/health"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+  db:
+    build:
+      context: .
+      dockerfile: docker/db.Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_ROOT_HOST: "%"
+    restart: always
+    ports:
+      - 3306:3306
 networks:
   default:
     name: app_net
