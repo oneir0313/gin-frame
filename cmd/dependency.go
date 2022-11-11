@@ -38,8 +38,11 @@ func initializeService() (*controllers.Handler, *sql.DB, error) {
 	routes := routes.NewRoutes(publicRoutes, jobRoutes)
 	routes.Setup()
 
-	middlewares := middlewares.NewCorsMiddleware(handler)
-	middlewares.Setup()
+	corsMiddlewares := middlewares.NewCorsMiddleware(handler)
+	corsMiddlewares.Setup()
+
+	jwtMiddlewares := middlewares.NewJwtMiddleware(handler)
+	jwtMiddlewares.Setup()
 
 	mysqlDB := ConnectMysqlDB()
 
@@ -77,7 +80,7 @@ func ConnectMysqlDB() *sql.DB {
 
 	err = m.Steps(1)
 	if err != nil {
-		log.Warn().Msgf("mysql db migration, %s", err.Error())
+		log.Debug().Msgf("mysql db migration, %s", err.Error())
 	}
 	db.SetMaxOpenConns(200)
 	db.SetMaxIdleConns(100)

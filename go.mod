@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/gin-contrib/cors v1.3.1
-	github.com/gin-gonic/gin v1.7.7
+	github.com/gin-gonic/gin v1.8.1
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/rs/zerolog v1.25.0
@@ -12,10 +12,15 @@ require (
 )
 
 require (
+	github.com/appleboy/gin-jwt/v2 v2.9.0 // indirect
+	github.com/goccy/go-json v0.9.7 // indirect
+	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
 	github.com/golang-migrate/migrate/v4 v4.15.2 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
+	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
+	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
 )
 
 require (
@@ -34,5 +39,5 @@ require (
 	golang.org/x/crypto v0.0.0-20220314234724-5d542ad81a58 // indirect
 	golang.org/x/sys v0.0.0-20220317061510-51cd9980dadf // indirect
 	golang.org/x/text v0.3.7 // indirect
-	google.golang.org/protobuf v1.27.1 // indirect
+	google.golang.org/protobuf v1.28.0 // indirect
 )
