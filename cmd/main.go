@@ -24,17 +24,11 @@ func main() {
 			time.Sleep(3 * time.Second)
 		}
 	}()
-	handler, sqlDB, redisDB, err := initializeService()
+	handler, sqlDB, err := initializeService()
 	defer func() {
 		err := sqlDB.Close()
 		if err != nil {
 			log.Fatal().Err(err).Msgf("mysql db connection close error")
-		}
-	}()
-	defer func() {
-		err := redisDB.Close()
-		if err != nil {
-			log.Fatal().Err(err).Msgf("redis db connection close error")
 		}
 	}()
 

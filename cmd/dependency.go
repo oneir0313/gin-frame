@@ -9,8 +9,10 @@ import (
 	"gin-frame/lib/logger"
 	"gin-frame/services"
 
-	"github.com/go-redis/redis"
 	"github.com/go-sql-driver/mysql"
+	"github.com/golang-migrate/migrate/v4"
+	migrateMySQL "github.com/golang-migrate/migrate/v4/database/mysql"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/rs/zerolog/log"
 )
 
@@ -21,7 +23,7 @@ func initSetting() {
 	log.Logger = logger.InitLogger()
 }
 
-func initializeService() (*controllers.Handler, *sql.DB, *redis.Client, error) {
+func initializeService() (*controllers.Handler, *sql.DB, error) {
 
 	handler := controllers.NewHandler()
 
@@ -40,9 +42,8 @@ func initializeService() (*controllers.Handler, *sql.DB, *redis.Client, error) {
 	middlewares.Setup()
 
 	mysqlDB := ConnectMysqlDB()
-	redisDB := ConnectRedisDB()
 
-	return &handler, mysqlDB, redisDB, nil
+	return &handler, mysqlDB, nil
 }
 
 func ConnectMysqlDB() *sql.DB {
@@ -64,18 +65,21 @@ func ConnectMysqlDB() *sql.DB {
 		log.Panic().Err(err).Msgf("mysql db connection failed")
 	}
 
+	driver, _ := migrateMySQL.WithInstance(db, &migrateMySQL.Config{})
+	m, err := migrate.NewWithDatabaseInstance(
+		"file://./migrations",
+		"mysql",
+		driver,
+	)
+	if err != nil {
+		log.Panic().Err(err).Msgf("mysql db migration new Instance failed")
+	}
+
+	err = m.Steps(1)
+	if err != nil {
+		log.Warn().Msgf("mysql db migration, %s", err.Error())
+	}
 	db.SetMaxOpenConns(200)
 	db.SetMaxIdleConns(100)
 	return db
-}
-
-func ConnectRedisDB() *redis.Client {
-
-	client := redis.NewClient(&redis.Options{
-		Addr:     configManager.Global.Api.Redis.Address,
-		Password: configManager.Global.Api.Redis.Password,
-		DB:       configManager.Global.Api.Redis.Database,
-	})
-
-	return client
 }

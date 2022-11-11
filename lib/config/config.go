@@ -3,7 +3,6 @@ package configmanager
 import (
 	"io/ioutil"
 	"os"
-	"strconv"
 
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v2"
@@ -35,21 +34,15 @@ type Mysql struct {
 	Password string `yaml:"password"`
 	Database string `yaml:"database"`
 }
-type Redis struct {
-	Address  string `yaml:"address"`
-	Password string `yaml:"password"`
-	Database int    `yaml:"database"`
-}
 
 //Configuration 參數結構
 type Configuration struct {
 	//WSServer jiface.IServer
-	Env   string `yaml:"env"`
+	Env string `yaml:"env"`
 
 	Api struct {
 		HTTPBind string `yaml:"http_bind"`
 		Mysql    Mysql  `yaml:"mysql"`
-		Redis    Redis  `yaml:"redis"`
 	} `yaml:"api_groups"`
 
 	Job struct {
@@ -80,19 +73,6 @@ func Reload() *Configuration {
 	}
 	if value, ok := os.LookupEnv("MYSQL_PASSWORD"); ok {
 		tempPara.Api.Mysql.Password = value
-	}
-
-	if value, ok := os.LookupEnv("REDIS_ADDRESS"); ok {
-		tempPara.Api.Redis.Address = value
-	}
-	if value, ok := os.LookupEnv("REDIS_PASSWORD"); ok {
-		tempPara.Api.Redis.Password = value
-	}
-	if value, ok := os.LookupEnv("REDIS_DATABASE"); ok {
-		redisDB, err := strconv.Atoi(value)
-		if err == nil {
-			tempPara.Api.Redis.Database = redisDB
-		}
 	}
 
 	if value, ok := os.LookupEnv("CRONTAB_SETTING"); ok {

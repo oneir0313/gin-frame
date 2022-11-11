@@ -16,8 +16,8 @@ Architecture template with gin framework, cronjob
 
 ## Running the project 
 
-- Make sure you have docker installed and redis/mysql is running. 
-- Configure `configs/config.yml` redis/mysql host
+- Make sure you have docker installed and mysql is running. 
+- Configure `configs/config.yml` mysql host
 - Run `docker-compose up -d` 
 - Check `localhost:9220`. 
 

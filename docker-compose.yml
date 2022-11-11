@@ -8,10 +8,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ADDRESS: ${MYSQL_ADDRESS}
-      # REDIS_DATABASE: ${REDIS_DATABASE}
-      # REDIS_PASSWORD: ${REDIS_PASSWORD}
-      # REDIS_ADDRESS: ${REDIS_ADDRESS}
-      # CRONTAB_SETTING: ${CRONTAB_SETTING}
+      CRONTAB_SETTING: ${CRONTAB_SETTING}
       TZ: Asia/Taipei
     restart: always
     ports:
@@ -32,6 +29,8 @@ services:
     restart: always
     ports:
       - 3306:3306
+    volumes:
+    - ./docker/volumes/db:/var/lib/mysql
 networks:
   default:
     name: app_net
