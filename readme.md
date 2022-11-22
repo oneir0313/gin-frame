@@ -32,7 +32,7 @@ curl --location --request POST 'http://localhost:9220/login' \
     "password": "admin"
 }'
 ```
-### login response
+### login response example
 ```json
 {
     "code": 200,
@@ -44,18 +44,12 @@ curl --location --request POST 'http://localhost:9220/login' \
 
 
 
-### GET Hello World  API with Authorization
+### GET Picture API with Authorization
 use `Authorization: Bearer ${token}`
 ```bash
-curl --location --request GET 'http://localhost:9220/auth/hello' \
+curl --location --request GET 'http://localhost:9220/auth/picture' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjgxNDc1MzQsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTY2ODE0MzkzNH0.ZpjQ55Zf9eGKgv_EzlTQDaiK6MlbYjrmHzY3mRi08N8' \
 --header 'Content-Type: application/json'
 ```
-### Hello World Response
-```json
-{
-    "account": "admin",
-    "text": "Hello World.",
-    "userID": "admin"
-}
-```
+### Picture API Response
+![](https://www.taiwan.net.tw/userfiles/image/Wallpaper_en/1920x1080_03.jpg)
