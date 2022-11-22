@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+	"net/http"
 	"strings"
 	"time"
 
@@ -120,6 +121,7 @@ func (m JwtMiddleware) Setup() {
 	auth.Use(authMiddleware.MiddlewareFunc())
 	{
 		auth.GET("/hello", helloHandler)
+		auth.GET("/picture", pictureHandler)
 	}
 
 }
@@ -132,4 +134,8 @@ func helloHandler(c *gin.Context) {
 		"account": user.(*model.User).Account,
 		"text":    "Hello World.",
 	})
+}
+
+func pictureHandler(c *gin.Context) {
+	c.Redirect(http.StatusFound, "https://www.taiwan.net.tw/userfiles/image/Wallpaper_en/1920x1080_03.jpg")
 }
